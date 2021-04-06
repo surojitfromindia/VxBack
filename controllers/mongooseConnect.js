@@ -6,7 +6,9 @@ function Connect() {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
-    .then(() => {})
+    .then(() => {
+      console.log("Database Connected");
+    })
     .catch((err) => console.log(err));
 }
 

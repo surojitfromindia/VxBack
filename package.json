@@ -17,10 +17,12 @@
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "handlebars": "^4.7.7",
     "html-pdf": "^2.2.0",
     "joi": "^17.4.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.1",
-    "mongoose": "^5.12.3"
+    "mongoose": "^5.12.3",
+    "puppeteer": "^8.0.0"
   }
 }
