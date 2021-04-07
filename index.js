@@ -5,6 +5,7 @@ const { Connect } = require("./controllers/mongooseConnect");
 const { GenratePdf } = require("./controllers/generatepdf");
 const app = express();
 //middlewares
+app.use(express.static("public"));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -22,7 +23,14 @@ const main = async () => {
 
   app.get("/sd", (req, res) => {
     let student = {
-      name: "surojit",
+      student_name: "Surojit Paul",
+      father_name: "Ram Kumar Paul",
+      student_type: "Regular",
+      passing_year: 2021,
+      student_roll: "709932N",
+      student_number: "0028",
+      student_grade : "A",
+      iss_date : "22/3/2020"
     };
     res.render("./billtemplate.ejs", { student: student });
   });

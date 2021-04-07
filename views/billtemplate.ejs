@@ -1,13 +1,172 @@
 <html>
   <head>
     <style>
-      h2 {
-        color: red;
-        margin: 78px auto;
+      body {
+        border: double;
+        margin: 9px;
+        border: solid;
+        border-width: 7px;
+        border-color: #1a4ebd;
+      }
+      br {
+        width: 3px;
+      }
+
+      .container {
+        padding: 16px;
+        font-size: 1.12rem;
+      }
+      .info {
+        display: flex;
+        justify-content: space-between;
+      }
+      .box1 {
+        width: 200px;
+        display: flex;
+        justify-content: left;
+      }
+      .box2 {
+        width: 200px;
+        display: flex;
+        justify-content: center;
+      }
+      .box3 {
+        width: 200px;
+        display: flex;
+        justify-content: right;
+      }
+      .contatcs {
+        display: flex;
+      }
+      .phnnumber {
+        display: flex;
+        flex-direction: column;
+      }
+      .school-logo {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: 34px;
+        gap: 20px;
+      }
+      .logo {
+        height: 120px;
+        width: 120px;
+      }
+      .address {
+        margin-top: -10px;
+        line-height: 22px;
+        font-size: 0.95rem;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+      }
+
+      .ce {
+        margin: 70 0px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .ce-header {
+        font-weight: 700;
+        font-size: 1.15rem;
+        word-spacing: 6px;
+      }
+      .ce-body {
+        padding: 0 25px;
+        font-weight: 500;
+        margin-top: 50px;
+        font-size: 0.95rem;
+        line-height: 30px;
+        word-spacing: 5px;
+        font-family: sans-serif;
+      }
+      .ce-body span[class="hi"],
+      .ce-sig span[class="hi"] {
+        font-weight: 600;
+        font-size: 0.9rem;
+        border-bottom: 2px dotted #000;
+        text-decoration: none;
+      }
+      .ce-body span[class="nonhi"] {
+        border-bottom: 2px dotted #000;
+        text-decoration: none;
+      }
+
+      .ce-sig {
+        padding: 0 25px;
+        margin-top: 170px;
+        display: flex;
+
+        justify-content: space-between;
       }
     </style>
   </head>
   <body>
-    <h2><%= student.name %></h2>
+    <div class="niceborder">
+      <div class="container">
+        <!--School information-->
+        <div>
+          <div class="info">
+            <strong class="box1"> No.:001</strong>
+            <strong class="box2"> (ESTD-1929)</strong>
+            <div class="contatcs box3">
+              <strong>Mobile:-&nbsp;</strong>
+              <div class="phnnumber">
+                <strong>+91 7278955534</strong>
+                <strong>+91 9432249475</strong>
+              </div>
+            </div>
+          </div>
+          <div class="school-logo">
+            <img class="logo" src="eer.png" alt="" />
+            <p>SALKIA SHREE MISHRA VIDYALAYA</p>
+          </div>
+          <div>
+            <p class="address" style="text-align: center">
+              (Co-Education High School)<br />
+              (Recognized By W.B.B.S.E & Aided by Govt. of West Bengal)
+              <br />(Under the auspices of Shree Mishra Education Welfare
+              Society)<br />
+              15, Govind Banerjee Lane, Salkia Howrah-711106
+              <br />E-mail:-rajesh180873@gmail.com <br />School Index No: F1-112
+            </p>
+          </div>
+          <hr />
+        </div>
+        <!--Certificate and student remarks-->
+        <div class="ce">
+          <div class="ce-header">CHARACTER CUM SCHOOL LEAVING CERTIFICATE</div>
+          <div class="ce-body">
+            This is to Certify that
+            <span class="hi"><%= student.student_name %></span> Son/Daughter of
+            Sri/Smt. <span class="hi"><%= student.father_name %></span> has been
+            a <span><%= student.student_type %></span> Student of this school.
+            She/He has Passed the Madhyamik Examination
+            <span><%= student.passing_year %></span> from West Bengal Board Of
+            Secondary Education bearing Roll
+            <span class="hi"><%= student.student_roll %></span> Number
+            <span class="hi"><%= student.student_number %></span> with grade
+            <span class="nonhi"><%= student.student_grade %></span> So far as I
+            know, he/she bears a good moral character. I wish him/her all
+            success in life.<br /><br />
+            Medium of Instruction and medium of examination is Hindi/English
+            <div>
+              <p style="text-align: center">"With Thanks"</p>
+            </div>
+          </div>
+        </div>
+        <!--Signature and school stamp-->
+        <div class="ce-sig">
+          <span
+            >Issued on: <span class="hi"><%= student.iss_date %></span></span
+          >
+          <div style="display: flex; flex-direction: column; text-align: right">
+            <span>Rajesh Kumar Mishra</span>
+            <span>Head of Institution</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

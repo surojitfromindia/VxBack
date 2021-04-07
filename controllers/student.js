@@ -17,11 +17,20 @@ function GetCertificate(roll, number) {
   return new Promise((resolve, reject) => {
     Certificate.findOne(
       { student_roll: roll, student_number: number },
+      { __v: 0, _id: 0 },
       (err, certificate) => {
         if (!err) resolve(certificate);
         else reject(new Error(err));
       }
     );
+  });
+}
+function GetAllCertificate() {
+  return new Promise((resolve, reject) => {
+    Certificate.find({}, { __v: 0, _id: 0 }, (err, certificate) => {
+      if (!err) resolve(certificate);
+      else reject(new Error(err));
+    });
   });
 }
 
@@ -40,4 +49,5 @@ module.exports = {
   Register: NewStudent,
   CreateCertificate,
   GetCertificate,
+  GetAllCertificate
 };

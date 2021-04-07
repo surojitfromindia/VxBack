@@ -3,6 +3,7 @@ const {
   Register,
   CreateCertificate,
   GetCertificate,
+  GetAllCertificate,
 } = require("../../controllers/student");
 
 router.get("/", (req, res) => {
@@ -18,6 +19,16 @@ router.post("/new", (req, res) => {
     .catch((err) => {
       res.status(400).send(err.details[0].message);
     });
+});
+
+router.get("/certificates", (req, res) => {
+  console.log("Whoo");
+
+  GetAllCertificate()
+    .then((certificate) => {
+      res.send(certificate);
+    })
+    .catch((err) => res.send(err));
 });
 
 router.get("/certificate", (req, res) => {

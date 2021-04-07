@@ -13,6 +13,8 @@ async function GenratePdf(req, res, templateData) {
 
   const pdf = await webPage.pdf({
     format: "letter",
+
+    path: "../filestorage",
   });
 
   await browser.close();
