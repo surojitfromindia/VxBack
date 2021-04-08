@@ -1,6 +1,5 @@
 const { studentSchema } = require("../validation/student");
 const { Certificate } = require("../models/Student");
-const { Promise } = require("mongoose");
 
 function NewStudent(data) {
   //data will be a json object
@@ -19,8 +18,10 @@ function GetCertificate(roll, number) {
       { student_roll: roll, student_number: number },
       { __v: 0, _id: 0 },
       (err, certificate) => {
-        if (!err) resolve(certificate);
-        else reject(new Error(err));
+        if (!err) {
+          if (certificate) resolve(certificate);
+          else reject(new Error("record not found"));
+        }
       }
     );
   });
@@ -49,5 +50,5 @@ module.exports = {
   Register: NewStudent,
   CreateCertificate,
   GetCertificate,
-  GetAllCertificate
+  GetAllCertificate,
 };

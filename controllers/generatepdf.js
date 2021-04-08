@@ -1,19 +1,20 @@
-const fs = require("fs");
 const puppeteer = require("puppeteer");
-
-const storagePath = "./filestorage";
-async function GenratePdf(req, res, templateData) {
+async function GenratePdf(req, res) {
   const browser = await puppeteer.launch({
     headless: true,
   });
   const webPage = await browser.newPage();
-  await webPage.goto("http://localhost:5000/sd", {
-    waitUntil: "networkidle0",
-  });
+  let roll = req.query.roll;
+  let number = req.query.number;
+  await webPage.goto(
+    `http://localhost:5000/certificate?roll=${roll}&number=${number}`,
+    {
+      waitUntil: "networkidle0",
+    }
+  );
 
   const pdf = await webPage.pdf({
     format: "letter",
-
     path: "../filestorage",
   });
 

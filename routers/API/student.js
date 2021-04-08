@@ -21,9 +21,8 @@ router.post("/new", (req, res) => {
     });
 });
 
+//return all ceritficates
 router.get("/certificates", (req, res) => {
-  console.log("Whoo");
-
   GetAllCertificate()
     .then((certificate) => {
       res.send(certificate);
@@ -31,8 +30,8 @@ router.get("/certificates", (req, res) => {
     .catch((err) => res.send(err));
 });
 
+//return one ceritficate values
 router.get("/certificate", (req, res) => {
-  console.log("Whoo");
   let roll = req.query.roll;
   let number = req.query.number;
   GetCertificate(roll, number)
@@ -41,13 +40,20 @@ router.get("/certificate", (req, res) => {
     })
     .catch((err) => res.send(err));
 });
-
+//add a new certificate value
 router.post("/certificate/new", (req, res) => {
   let body = req.body;
-  CreateCertificate(body).then((result) => {
-    res.send(result);
-  });
+
+  CreateCertificate(body)
+    .then((result) => {
+      res.send(result);
+    })
+    .catch((err) => {
+      console.log({ err });
+      res.status(400).send(err);
+    });
 });
+
 
 router.get("/:id", (req, res) => {
   let student = {
