@@ -4,6 +4,7 @@ const {
   CreateCertificate,
   GetCertificate,
   GetAllCertificate,
+  DeleteCertificateRecord,
 } = require("../../controllers/student");
 
 router.get("/", (req, res) => {
@@ -43,7 +44,6 @@ router.get("/certificate", (req, res) => {
 //add a new certificate value
 router.post("/certificate/new", (req, res) => {
   let body = req.body;
-
   CreateCertificate(body)
     .then((result) => {
       res.send(result);
@@ -54,6 +54,17 @@ router.post("/certificate/new", (req, res) => {
     });
 });
 
+router.delete("/certificate/:id", (req, res) => {
+  let id = req.params.id;
+  DeleteCertificateRecord(id)
+    .then((isdeleted) => {
+      res.send(isdeleted);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send(err);
+    });
+});
 
 router.get("/:id", (req, res) => {
   let student = {

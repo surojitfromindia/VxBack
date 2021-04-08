@@ -16,7 +16,7 @@ function GetCertificate(roll, number) {
   return new Promise((resolve, reject) => {
     Certificate.findOne(
       { student_roll: roll, student_number: number },
-      { __v: 0, _id: 0 },
+      { __v: 0 },
       (err, certificate) => {
         if (!err) {
           if (certificate) resolve(certificate);
@@ -28,7 +28,7 @@ function GetCertificate(roll, number) {
 }
 function GetAllCertificate() {
   return new Promise((resolve, reject) => {
-    Certificate.find({}, { __v: 0, _id: 0 }, (err, certificate) => {
+    Certificate.find({}, { __v: 0 }, (err, certificate) => {
       if (!err) resolve(certificate);
       else reject(new Error(err));
     });
@@ -46,9 +46,26 @@ function CreateCertificate(data) {
   });
 }
 
+function DeleteCertificateRecord(id) {
+  return new Promise((resolve, reject) => {
+    Certificate.deleteOne(
+      {
+        _id: id,
+      },
+      (err, d) => {
+        if (!err) {
+          if (d.deletedCount > 0) resolve(true);
+          else resolve(false);
+        } else reject(new Error("error"));
+      }
+    );
+  });
+}
+
 module.exports = {
   Register: NewStudent,
   CreateCertificate,
   GetCertificate,
   GetAllCertificate,
+  DeleteCertificateRecord,
 };
