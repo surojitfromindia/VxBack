@@ -1,9 +1,30 @@
 const { model, Schema } = require("mongoose");
 
 const CertificateSchema = new Schema({
-  student_name: { type: String, required: true, set: normalizename },
-  father_name: { type: String, required: true, set: normalizename },
-  student_type: { type: String, enum: ["Regular", "Compart", "C.C"] },
+  student_name: {
+    type: String,
+    match: [
+      /^[a-zA-Z\.]+(\s?[a-zA-Z\.]+)?\s[a-zA-Z]+$/i,
+      "name must contain at least one space, and no number",
+    ],
+    required: [true, "Student name is required"],
+    set: normalizename,
+  },
+  father_name: {
+    type: String,
+    match: [
+      /^[a-zA-Z\.]+(\s?[a-zA-Z\.]+)?\s[a-zA-Z]+$/i,
+      "name must contain at least one space, and no number",
+    ],
+    required: true,
+    set: normalizename,
+  },
+  student_type: {
+    type: String,
+    match: [/(Regular|Compart|C.C)/i, "Type does't match specified values"],
+    enum: ["Regular", "Compart", "C.C"],
+    set: normalizename,
+  },
   passing_year: { type: Number, required: true, min: 2000 },
   student_roll: { type: String, required: true },
   student_number: { type: String, required: true },
