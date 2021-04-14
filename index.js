@@ -8,7 +8,7 @@ const { GetCertificate } = require("./controllers/student");
 const { genWord } = require("./controllers/generateCertificateWord");
 //middlewares
 app.use(express.static(path.join(__dirname, "public")));
-app.use(cors());
+app.use(cors({}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
@@ -42,6 +42,25 @@ const main = async () => {
       })
       .catch((err) => res.send("not found"));
   });
+
+  let i = 32;
+  app.get("/update/:cul", (req, res) => {
+    res.setHeader("Cache-Control", "no-cache");
+    res.setHeader("Content-Type", "text/event-stream");
+    res.setHeader("Connection", "keep-alive");
+    res.flushHeaders();
+    var inte = setInterval(() => {
+      if (req.params.cul < i)
+        res.write(`data: update page ${i} req \nid: ${i}\n\n`);
+    }, 8000);
+
+    res.on("close", () => {
+      console.log("closed %d", i);
+      clearInterval(inte);
+      res.end();
+    });
+  });
+
   app.listen(process.env.PORT || 5000, () => {
     console.log("Server Started");
   });

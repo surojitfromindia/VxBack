@@ -7,6 +7,8 @@ const {
   DeleteCertificateRecord,
 } = require("../../controllers/student");
 
+const { Certificate } = require("../../models/Student");
+
 router.get("/", (req, res) => {
   res.send("all student");
 });
@@ -64,6 +66,47 @@ router.delete("/certificate/:id", (req, res) => {
       console.log(err);
       res.status(400).send(err);
     });
+});
+
+let bang = 0;
+//event source
+router.get("/certificate/:cuL", async (req, res) => {
+  let cic = req.params.cuL;
+
+  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("Content-Type", "text/event-stream");
+  res.setHeader("Connection", "keep-alive");
+  res.flushHeaders();
+  setInterval(() => {
+    Certificate.countDocuments({}, (err, count) => {
+      if (cic !== count) {
+        bang++;
+        if (cic < count)
+          res.write(
+            `data: ${JSON.stringify({
+              state: "found",
+              message: `${count - cic} ${
+                count - cic === 1 ? "record" : "records"
+              } found. Refresh the Page`,
+            })}\nid :${bang}\n\n`
+          );
+        else if (cic > count)
+          res.write(
+            `data: ${JSON.stringify({
+              state: "removed",
+              message: `${cic - count} ${
+                cic - count === 1 ? "record" : "records"
+              } deleted. Refresh the Page`,
+            })}\nid :${bang}\n\n`
+          );
+      }
+
+      // res.write(`data: ${bang}\nid: ${bang}\n\n`);
+    });
+  }, 5000);
+  req.on("close", () => {
+    console.log("closed");
+  });
 });
 
 router.get("/:id", (req, res) => {
