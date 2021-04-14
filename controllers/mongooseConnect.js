@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 function Connect() {
   mongoose
     .connect(
-      `mongodb+srv://user_surojit:passsurojit@cluster0.3yu8q.mongodb.net/productionDbOne`,
+      `mongodb+srv://user_surojit:passsurojit@cluster0.3yu8q.mongodb.net/productionDbTwo`,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
