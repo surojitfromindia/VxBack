@@ -4,7 +4,7 @@
   "description": "This is a mini apllication server to handle student data entry and generate certificate for the students",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "author": "surojit paul",
   "license": "ISC",
