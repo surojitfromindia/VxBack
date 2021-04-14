@@ -2,10 +2,13 @@ const mongoose = require("mongoose");
 
 function Connect() {
   mongoose
-    .connect(`mongodb://localhost:27017/productionDbOne`, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    })
+    .connect(
+      `mongodb+srv://user_surojit:passsurojit@cluster0.3yu8q.mongodb.net/productionDbOne`,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }
+    )
     .then(() => {
       console.log("Database Connected");
     })

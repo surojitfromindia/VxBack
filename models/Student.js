@@ -21,9 +21,8 @@ const CertificateSchema = new Schema({
   },
   student_type: {
     type: String,
-    match: [/(Regular|Compart|C.C)/i, "Type does't match specified values"],
+    match: [/(Regular|Compart|C\.C)/i, "Type does't match specified values"],
     enum: ["Regular", "Compart", "C.C"],
-    set: normalizename,
   },
   passing_year: { type: Number, required: true, min: 2000 },
   student_roll: { type: String, required: true },
