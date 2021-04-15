@@ -26,11 +26,9 @@ function genWord(body, res) {
       },
       cmdDelimiter: ["{", "}"],
     }).then((wbuff) => {
-      fs.writeFile(__dirname + "../../filestorage/report.docx", wbuff).then(
-        () => {
-          res.download(__dirname + "../../filestorage/report.docx");
-        }
-      );
+      fs.writeFile(__dirname + "/report.docx", wbuff).then(() => {
+        res.download(__dirname + "/report.docx");
+      });
     });
   });
 }
