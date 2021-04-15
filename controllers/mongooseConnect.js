@@ -7,7 +7,7 @@ let s2 =
   "mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000";
 function Connect() {
   mongoose
-    .connect(`${s2}`, {
+    .connect(`${s1}`, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     })
